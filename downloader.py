@@ -44,7 +44,6 @@ def download_music(url: str, save_path: str)->bool:
             if(music_url[:4] != "http"):
                 music_url = HOMEPAGE + music_url
             music = rq.get(music_url, headers=HEADERS)
-            print(urlparse(music.url))
             music_type = urlparse(music.url).path[-3:]
             full_path = save_path + title + "-" + author + "." + music_type
             with open(full_path, 'wb') as f:

@@ -9,7 +9,7 @@ from mainwindow import MainWindow
 from PySide6.QtWidgets import QApplication
 
 if __name__ == "__main__":
-    SAVE_PATH = "./music"
+    SAVE_PATH = "./music/"
     if(not os.path.exists(SAVE_PATH)):
         os.mkdir(SAVE_PATH)
 

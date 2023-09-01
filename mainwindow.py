@@ -41,4 +41,4 @@ class MainWindow(QWidget):
             for i in range(1, len(items), 2):
                 url = items[i].text()
                 if(re.match(r"https://www.hifini.com/thread-\d+.htm", url)):
-                    download_music(url, "./")
+                    download_music(url, "./music/")
