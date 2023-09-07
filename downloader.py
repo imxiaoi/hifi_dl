@@ -50,5 +50,5 @@ def download_music(url: str, save_path: str)->bool:
                 with open(full_path, 'wb') as f:
                     for chunk in music.iter_content(chunk_size=8192):
                         f.write(chunk)
-                        return True
+                    return True
     return False
