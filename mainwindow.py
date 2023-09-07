@@ -3,8 +3,7 @@
 
 import re
 
-from PySide6.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QCheckBox
-from PySide6.QtCore import Slot
+from PySide6.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QMessageBox
 
 from ui.mainwindow_ui import Ui_Widget
 
@@ -17,6 +16,7 @@ class MainWindow(QWidget):
         self.ui.setupUi(self)
         
         self.ui.pushButton_search.clicked.connect(self.slot_pushButton_search_click)
+        self.ui.lineEdit_search.returnPressed.connect(self.slot_pushButton_search_click)
         self.ui.pushButton_download.clicked.connect(self.slot_pushButton_download_click)
         self.ui.tableWidget_search_result.setSelectionBehavior(QTableWidget.SelectRows)
 
@@ -36,9 +36,17 @@ class MainWindow(QWidget):
                 
     def slot_pushButton_download_click(self):
         items = self.ui.tableWidget_search_result.selectedItems()
+        sucess_count = 0
 
         if(len(items) > 0):
             for i in range(1, len(items), 2):
                 url = items[i].text()
                 if(re.match(r"https://www.hifini.com/thread-\d+.htm", url)):
-                    download_music(url, "./music/")
+                    if(download_music(url, "./music/")):
+                        sucess_count +=1
+
+        text = "成功下载了" + str(sucess_count) + "首歌曲！"
+        msg_box = QMessageBox()        
+        msg_box.setWindowTitle("提示")
+        msg_box.setText(text)
+        msg_box.exec()
